@@ -12,6 +12,7 @@ server.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
 
+// API Home
 server.use("/", (req, res) => {
   res.status(200).send(`<h1>Enrichment 🛠</h1>`);
 });
