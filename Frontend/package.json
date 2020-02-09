@@ -1,5 +1,5 @@
 {
-  "name": "clearbit_enrichment_free_tool_frontend",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
