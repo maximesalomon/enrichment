@@ -17,7 +17,7 @@ const FreeTool = () => {
   const [data, setData] = useState("");
   const [lead, setLead] = useState("");
   const [request, setRequest] = useState(null);
-  const [leadConfirmation, setleadConfirmation] = useState(null);
+  const [leadConfirmation, setLeadConfirmation] = useState(null);
 
   const requestChange = event => {
     setData(event.target.value);
@@ -117,7 +117,7 @@ const FreeTool = () => {
       .put(url, qs.stringify(requestBody), config)
       .then(res => {
         setLead("")
-        setleadConfirmation(res.data);
+        setLeadConfirmation("Thanks! We just sent you more informations on Clearbit Enrichment.");
       })
       .catch(err => {
         console.log(err);
@@ -149,7 +149,7 @@ const FreeTool = () => {
                       onChange={event => leadChange(event)}
                     ></LeadCaptureInput>
                     <TryEnrichmentForFreeBtn>
-                      Get Started
+                      Learn more
                     </TryEnrichmentForFreeBtn>
                   </LeadCaptureForm>
                   <Or>or</Or>
