@@ -37,27 +37,27 @@ router.post("/", (req, res) => {
 });
 
 // PUT visitor by id
-router.put("/:id", (req, res) => {
-  const { id } = req.params;
-  DB.findVisitorById(id)
-    .then(visitor => {
-      if (visitor.requests_count < 5) {
-        DB.updateVisitorRequestsCount(id).then(success => {
-          if (success === 1) {
-            res.send(`Visitor has been successfully updated!`);
-          } else {
-            res
-              .status(404)
-              .json({ message: "Could not find visitor with given id." });
-          }
-        });
-      } else {
-        res.send(`You have used your 5 free credits!`);
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to update signal!" });
-    });
-});
+// router.put("/:id", (req, res) => {
+//   const { id } = req.params;
+//   DB.findVisitorById(id)
+//     .then(visitor => {
+//       if (visitor.requests_count < 5) {
+//         DB.updateVisitorRequestsCount(id).then(success => {
+//           if (success === 1) {
+//             res.send(`Visitor has been successfully updated!`);
+//           } else {
+//             res
+//               .status(404)
+//               .json({ message: "Could not find visitor with given id." });
+//           }
+//         });
+//       } else {
+//         res.send(`You have used your 5 free credits!`);
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to update signal!" });
+//     });
+// });
 
 module.exports = router;
