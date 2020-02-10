@@ -1,4 +1,4 @@
-const express = require("../node_modules/express");
+const express = require("express");
 const uuidv4 = require("uuid/v4");
 
 const DB = require("../data/helpers");
