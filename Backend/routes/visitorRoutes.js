@@ -45,7 +45,7 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const visitor = req.body;
   DB.findVisitorById(id)
-  .update(visitor) // Update Visitor
+  .update(visitor)
   .then(success => {
     if (success === 1) {
       res.send(`Signal has been successfully updated!`);
