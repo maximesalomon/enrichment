@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import clearbitLogo from "./clearbit-logo.png";
+import { TryEnrichmentForFreeBtn } from '../Buttons/Buttons';
 
 const Navbar = () => {
   return (
     <NavbarContainer>
       <NavbarLinks>
-        <img src={clearbitLogo} alt="Clearbit Logo" height="42" width="42" />
+        <Link to="/"><img src={clearbitLogo} alt="Clearbit Logo" height="42" width="42" /></Link>
         <NavbarCTAs>
           <LogIn>Log In</LogIn>
-          <Link to="/free-tool"><TryEnrichmentForFree>Try Enrichment For Free</TryEnrichmentForFree></Link>
+          <Link to="/free-tool"><TryEnrichmentForFreeBtn>Try Enrichment for Free</TryEnrichmentForFreeBtn></Link>
         </NavbarCTAs>
       </NavbarLinks>
     </NavbarContainer>
@@ -49,16 +51,6 @@ const LogIn = styled.a`
     text-align: center;
     font-family: "Lato";
     padding-right: 10px;
-    cursor: pointer;
-`
-
-const TryEnrichmentForFree = styled.button`
-    color: white;
-    background-image: linear-gradient(to left, #2c99f8 0%, #0088f6 100%);
-    padding: 12px;
-    font-size: 15px;
-    font-weight: 400;
-    border-radius: 8px;
     cursor: pointer;
 `
 
