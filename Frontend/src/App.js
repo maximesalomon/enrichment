@@ -37,9 +37,8 @@ const App = () => {
 
   return (
     <VisitorContext.Provider value={{ visitorId }}>
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/enrichment" component={Enrichment}/>
-      <Route exact path="/enrichment/free-tool" component={FreeTool}/>
+      <Route exact path="/" component={Enrichment}/>
+      <Route exact path="/free-tool" component={FreeTool}/>
     </VisitorContext.Provider>
   );
 }
