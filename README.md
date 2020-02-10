@@ -11,7 +11,9 @@ Build a standalone tool/webpage which allows visitors to try our Enrichment prod
 You are free to use your creativity, but there is one requirement: The tool offers a max of 5 free enrichments before showing an email capture form.
 
 ## Stack
+
 Frontend = React w/ Hooks + Styled-Components + axios
+
 Backend = Express + pg
 
 ## Setup
@@ -19,15 +21,20 @@ Backend = Express + pg
 git clone https://github.com/maximesalomon/enrichment.git
 
 cd Backend
+
 yarn install
+
 npx knex migrate:latest
+
 yarn server
 
 cd ..
 
 cd Frontend
+
 yarn install
+
 yarn start
 
 
-Maxime Salomon - maxime@croissant.io
+Maxime Salomon - maxime@croissant.io 🇫🇷
