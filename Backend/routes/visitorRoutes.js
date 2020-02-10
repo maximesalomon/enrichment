@@ -4,30 +4,28 @@ const uuidv4 = require("uuid/v4");
 const DB = require("../data/helpers");
 const router = express.Router();
 
-// // GET visitor by id
-// router.get("/:id", (req, res) => {
-//   const { id } = req.params;
-//   DB.findVisitorById(id)
-//     .then(visitor => {
-//       if (visitor.requests_count < 5) {
-//         res.status(200);
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "Could not find signal with given id." });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to get signal." });
-//     });
-// });
+// GET visitor by id
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  DB.findVisitorById(id)
+    .then(visitor => {
+      if (visitor) {
+        res.status(200).json(visitor);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find visitor with given id." });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get visitor." });
+    });
+});
 
 // POST visitor
 router.post("/", (req, res) => {
   const id = uuidv4();
-  const visitor = {
-    id: id
-  };
+  const visitor = { id: id };
   // const visitor = req.body; // create visitor from request body
   DB.createVisitor(visitor) // create new visitor
     .then(success => {
