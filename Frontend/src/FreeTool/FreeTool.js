@@ -117,6 +117,7 @@ const FreeTool = () => {
       .then(res => {
         res.status(200).json({message: "Lead has been successfully saved!"})
         setLead("")
+        alert("Thanks!")
       })
       .catch(err => {
         console.log(err);
@@ -127,6 +128,7 @@ const FreeTool = () => {
       <EnrichContainer>
         <EnrichForm onSubmit={event => requestSubmit(event)}>
           <EnrichInput
+            value={data}
             placeholder="Enter an email..."
             onChange={event => requestChange(event)}
           ></EnrichInput>
@@ -142,6 +144,7 @@ const FreeTool = () => {
                 <LeadCapture>
                   <LeadCaptureForm onSubmit={event => leadSubmit(event)}>
                     <LeadCaptureInput
+                      value={lead}
                       placeholder="Enter your email..."
                       onChange={event => leadChange(event)}
                     ></LeadCaptureInput>
