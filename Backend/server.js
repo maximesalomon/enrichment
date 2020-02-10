@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+require('dotenv').config()
 
 const visitorRoutes = require("./routes/visitorRoutes");
 const requestRoutes = require("./routes/requestRoutes");

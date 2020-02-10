@@ -2,7 +2,8 @@ const express = require("express");
 const uuidv4 = require("uuid/v4");
 const bodyParser = require("body-parser");
 
-const clearbit = require("clearbit")("sk_682083b708dd971ac5ef22661babf1cd");
+const CLEARBIT_SECRET_API_KEY = process.env.CLEARBIT_SECRET_API_KEY;
+const clearbit = require("clearbit")(CLEARBIT_SECRET_API_KEY);
 
 const DB = require("../data/helpers");
 const router = express.Router();
