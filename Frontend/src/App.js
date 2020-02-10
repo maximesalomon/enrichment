@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Enrichment from '../src/Enrichment/Enrichment';
 import FreeTool from '../src/FreeTool/FreeTool';
+import Navbar from '../src/Navbar/Navbar';
 
 export const VisitorContext = createContext(null)
 
@@ -36,6 +37,7 @@ const App = () => {
 
   return (
     <VisitorContext.Provider value={{ visitorId }}>
+      <Navbar />
       <Route exact path="/" component={Enrichment}/>
       <Route exact path="/free-tool" component={FreeTool}/>
     </VisitorContext.Provider>
