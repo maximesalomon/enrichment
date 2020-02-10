@@ -13,7 +13,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use("/visitors", visitorRoutes);
-server.use("/requests", visitorRoutes);
+server.use("/requests", requestRoutes);
 
 // Server listening
 server.listen(PORT, () =>
