@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Popup from 'react-popup';
 import { VisitorContext } from "../App";
 
 import {
@@ -116,9 +115,8 @@ const FreeTool = () => {
     axios
       .put(url, qs.stringify(requestBody), config)
       .then(res => {
-        res.status(200).json({message: "Lead has been successfully saved!"})
+        console.log(res)
         setLead("")
-        Popup.alert('Thanks!');
       })
       .catch(err => {
         console.log(err);
