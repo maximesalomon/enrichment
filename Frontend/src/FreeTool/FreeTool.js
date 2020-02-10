@@ -140,7 +140,7 @@ const FreeTool = () => {
                   <Or>or</Or>
                   <RequestDemoBtn>Request a Demo</RequestDemoBtn>
                 </LeadCapture>
-                {leadConfirmation}
+                <leadConfirmation>{leadConfirmation}</leadConfirmation>
               </RequestDataContainer>
             </>
           ) : (
@@ -156,6 +156,7 @@ const PersonHeader = styled.div`
   padding-left: 20px;
   display: flex;
 `;
+
 const Avatar = styled.img`
   border-radius: 6px;
   height: 50px;
@@ -178,6 +179,10 @@ const EnrichmentEmail = styled.p`
 const PersonInfos = styled.div`
   margin-top: 40px;
   padding-left: 20px;
+`;
+
+const PersonHeader = styled.div`
+  padding-top: 14px;
 `;
 
 const FreeToolContainer = styled.section`
