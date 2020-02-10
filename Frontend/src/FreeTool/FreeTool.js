@@ -41,6 +41,7 @@ const FreeTool = () => {
       .post(url, qs.stringify(requestBody), config)
       .then(res => {
         setRequest(res.data);
+        setData("")
       })
       .catch(err => {
         console.log(err);
@@ -114,7 +115,8 @@ const FreeTool = () => {
     axios
       .put(url, qs.stringify(requestBody), config)
       .then(res => {
-        res.status(200).json(message => "Lead has been successfully saved!")
+        res.status(200).json({message: "Lead has been successfully saved!"})
+        setLead("")
       })
       .catch(err => {
         console.log(err);
