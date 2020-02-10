@@ -181,7 +181,7 @@ const PersonInfos = styled.div`
   padding-left: 20px;
 `;
 
-const PersonHeader = styled.div`
+const leadConfirmation = styled.div`
   padding-top: 14px;
 `;
 
