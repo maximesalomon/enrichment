@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { VisitorContext } from "../App";
 
+const qs = require("query-string");
+
 const FreeTool = () => {
-  const visitor_id = useContext(VisitorContext);
+  const visitor = useContext(VisitorContext);
   const [data, setData] = useState();
   const handleChange = event => {
     setData(event.target.value);
@@ -14,12 +16,13 @@ const FreeTool = () => {
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
+    const requestBody = {
+      visitor_id: visitor.visitorId,
+      type: 'email',
+      data: data
+    }
     axios
-      .post(url, {
-        visitor_id: '65eab2fc-b609-4180-ab6f-bea31c523a6c',
-        type: 'email',
-        data: 'maxime@croissant.io'
-      }, config)
+      .post(url, qs.stringify(requestBody), config)
       .then(res => {
        console.log(res);
       })
