@@ -1,8 +1,12 @@
 const express = require("express");
 const uuidv4 = require("uuid/v4");
+const bodyParser = require("body-parser");
 
 const DB = require("../data/helpers");
 const router = express.Router();
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // GET visitor by id
 router.get("/:id", (req, res) => {
@@ -37,27 +41,23 @@ router.post("/", (req, res) => {
 });
 
 // PUT visitor by id
-// router.put("/:id", (req, res) => {
-//   const { id } = req.params;
-//   DB.findVisitorById(id)
-//     .then(visitor => {
-//       if (visitor.requests_count < 5) {
-//         DB.updateVisitorRequestsCount(id).then(success => {
-//           if (success === 1) {
-//             res.send(`Visitor has been successfully updated!`);
-//           } else {
-//             res
-//               .status(404)
-//               .json({ message: "Could not find visitor with given id." });
-//           }
-//         });
-//       } else {
-//         res.send(`You have used your 5 free credits!`);
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to update signal!" });
-//     });
-// });
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const visitor = req.body;
+  DB.findVisitorById(id)
+  .update(visitor) // Update Visitor
+  .then(success => {
+    if (success === 1) {
+      res.send(`Signal has been successfully updated!`);
+    } else {
+      res
+        .status(404)
+        .json({ message: "Could not find signal with given id." });
+    }
+  })
+  .catch(err => {
+    res.status(500).json({ message: "Failed to update signal!" });
+  });
+});
 
 module.exports = router;
