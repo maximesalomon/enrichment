@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Popup from 'react-popup';
 import { VisitorContext } from "../App";
 
 import {
@@ -117,7 +118,7 @@ const FreeTool = () => {
       .then(res => {
         res.status(200).json({message: "Lead has been successfully saved!"})
         setLead("")
-        alert("Thanks!")
+        Popup.alert('Thanks!');
       })
       .catch(err => {
         console.log(err);
@@ -155,6 +156,7 @@ const FreeTool = () => {
                   <Or>or</Or>
                   <RequestDemoBtn>Request a Demo</RequestDemoBtn>
                 </LeadCapture>
+                <Popup />
               </RequestDataContainer>
             </>
           ) : (
