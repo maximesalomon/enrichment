@@ -36,7 +36,7 @@ const App = () => {
   }, []);
 
   return (
-    <VisitorContext.Provider value={{ visitorId, setVisitorId }}>
+    <VisitorContext.Provider value={{ visitorId }}>
       <Route exact path="/" component={Home}/>
       <Route exact path="/enrichment" component={Enrichment}/>
       <Route exact path="/enrichment/free-tool" component={FreeTool}/>
