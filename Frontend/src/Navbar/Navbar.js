@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import clearbitLogo from "./clearbit-logo.png";
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
         <img src={clearbitLogo} alt="Clearbit Logo" height="42" width="42" />
         <NavbarCTAs>
           <LogIn>Log In</LogIn>
-          <TryEnrichmentForFree>Try Enrichment For Free</TryEnrichmentForFree>
+          <Link to="/free-tool"><TryEnrichmentForFree>Try Enrichment For Free</TryEnrichmentForFree></Link>
         </NavbarCTAs>
       </NavbarLinks>
     </NavbarContainer>
