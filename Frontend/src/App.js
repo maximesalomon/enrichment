@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { createContext } from 'react';
+import { Route } from 'react-router-dom';
 import axios from "axios";
+
+import Home from '../src/Homepage/homepage';
+import Enrichment from '../src/Enrichment/Enrichment';
+import FreeTool from '../src/FreeTool/FreeTool';
 
 export const VisitorContext = createContext(null)
 
@@ -32,9 +37,9 @@ const App = () => {
 
   return (
     <VisitorContext.Provider value={{ visitorId, setVisitorId }}>
-      <div className="App">
-        <h1>Enrichment 🛠</h1>
-      </div>
+      <Route exact path="/" component={Home}/>
+      <Route exact path="/enrichment" component={Enrichment}/>
+      <Route exact path="/enrichment/free-tool" component={FreeTool}/>
     </VisitorContext.Provider>
   );
 }
