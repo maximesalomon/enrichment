@@ -3,7 +3,6 @@ import { createContext } from 'react';
 import { Route } from 'react-router-dom';
 import axios from "axios";
 
-import Home from '../src/Homepage/homepage';
 import Enrichment from '../src/Enrichment/Enrichment';
 import FreeTool from '../src/FreeTool/FreeTool';
 
