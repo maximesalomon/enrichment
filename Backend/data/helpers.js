@@ -1,5 +1,7 @@
 const db = require("./db");
 
+
+// Visitors helpers
 const createVisitor = visitor => {
   return db("visitors").insert(visitor);
 };
@@ -26,8 +28,22 @@ const updateVisitorRequestsCount = id => {
     });
 };
 
+
+// Request helpers
+const createRequest = request => {
+  return db("requests").insert(request);
+};
+
+const findRequestById = id => {
+  return db("requests")
+    .where({ id })
+    .first();
+};
+
 module.exports = {
   findVisitorById,
   createVisitor,
-  updateVisitorRequestsCount
+  updateVisitorRequestsCount,
+  createRequest,
+  findRequestById
 };
