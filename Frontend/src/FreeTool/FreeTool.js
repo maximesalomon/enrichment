@@ -154,7 +154,6 @@ const FreeTool = () => {
                   <Or>or</Or>
                   <RequestDemoBtn>Request a Demo</RequestDemoBtn>
                 </LeadCapture>
-                <Popup />
               </RequestDataContainer>
             </>
           ) : (
