@@ -3,20 +3,30 @@ import axios from "axios";
 import styled from "styled-components";
 import { VisitorContext } from "../App";
 
-import { EnrichBtn, RequestDemoBtn, TryEnrichmentForFreeBtn } from "../Buttons/Buttons";
+import {
+  EnrichBtn,
+  RequestDemoBtn,
+  TryEnrichmentForFreeBtn
+} from "../Buttons/Buttons";
 
 const qs = require("query-string");
 
 const FreeTool = () => {
   const visitor = useContext(VisitorContext);
-  const [data, setData] = useState();
+
+  const [data, setData] = useState("");
+  const [lead, setLead] = useState("");
   const [request, setRequest] = useState(null);
 
-  const handleChange = event => {
+  const requestChange = event => {
     setData(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const leadChange = event => {
+    setLead(event.target.value);
+  };
+
+  const requestSubmit = event => {
     event.preventDefault();
     const url = "https://enrichment-free-tool.herokuapp.com/requests";
     const config = {
@@ -31,7 +41,6 @@ const FreeTool = () => {
       .post(url, qs.stringify(requestBody), config)
       .then(res => {
         setRequest(res.data);
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -42,9 +51,7 @@ const FreeTool = () => {
     return (
       <DefaultDataContainer>
         <DefaultDataTitle>Enrichment Free Tool</DefaultDataTitle>
-        <p>
-          Enter an email or domain to get a taste of what Clearbit has to offer.
-        </p>
+        <p>Enter an email to get a taste of what Clearbit has to offer.</p>
       </DefaultDataContainer>
     );
   };
@@ -52,36 +59,74 @@ const FreeTool = () => {
   const RequestData = () => {
     return (
       <RequestDataContainer>
-        {console.log(request.person)}
-        {/* Name: {request.person.name.fullName} */}
-        {/* Email: {request.person.email} */}
+        <PersonHeader>
+          <Avatar src={request.person.avatar} />
+          <EnrichmentText>
+            enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail>
+          </EnrichmentText>
+        </PersonHeader>
+        <p>
+          <strong>Name:</strong> {request.person.name.fullName}
+        </p>
+        <p>
+          <strong>Bio:</strong> {request.person.bio}
+        </p>
+        <p>
+          <strong>Email:</strong> {request.person.email}
+        </p>
+        <p>
+          <strong>Employment:</strong> {request.person.employment.title} at{" "}
+          {request.person.employment.name}
+        </p>
+        <p>
+          <strong>Location:</strong> {request.person.location}
+        </p>
+
+        <p>
+          <strong>Website:</strong> {request.person.site}
+        </p>
+        <p>
+          <strong>Github:</strong> {request.person.github.handle}
+        </p>
+        <p>
+          <strong>Twitter:</strong> {request.person.twitter.handle}
+        </p>
+        <p>
+          <strong>Facebook:</strong> {request.person.facebook.handle}
+        </p>
+        <p>
+          <strong>Linkedin"</strong> {request.person.linkedin.handle}
+        </p>
       </RequestDataContainer>
     );
   };
 
-  const NoMoreCredits = () => {
-    return (
-      <RequestDataContainer>
-        <p>{request}</p>
-        <LeadCapture>
-          <LeadCaptureForm>
-            <LeadCaptureInput/>
-            <TryEnrichmentForFreeBtn>Get Started</TryEnrichmentForFreeBtn>
-          </LeadCaptureForm>
-          <Or>or</Or>
-          <RequestDemoBtn>Request a Demo</RequestDemoBtn>
-        </LeadCapture>
-      </RequestDataContainer>
-    );
-  };
+  const leadSubmit = event => {
+    event.preventDefault();
 
+    const url = `https://enrichment-free-tool.herokuapp.com/visitors/${visitor.visitorId}`;
+    const config = {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    const requestBody = {
+      email: lead
+    };
+    axios
+      .put(url, qs.stringify(requestBody), config)
+      .then(res => {
+        res.status(200).json(message => "Lead has been successfully saved!")
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
     <FreeToolContainer>
       <EnrichContainer>
-        <EnrichForm onSubmit={event => handleSubmit(event)}>
+        <EnrichForm onSubmit={event => requestSubmit(event)}>
           <EnrichInput
-            placeholder="Enter an email or domain..."
-            onChange={event => handleChange(event)}
+            placeholder="Enter an email..."
+            onChange={event => requestChange(event)}
           ></EnrichInput>
           <EnrichBtn>Enrich</EnrichBtn>
         </EnrichForm>
@@ -89,7 +134,24 @@ const FreeTool = () => {
           {request === null ? (
             <DefaultData />
           ) : request === "You have used your 5 free credits!" ? (
-            <NoMoreCredits />
+            <>
+              <RequestDataContainer>
+                <p>{request}</p>
+                <LeadCapture>
+                  <LeadCaptureForm onSubmit={event => leadSubmit(event)}>
+                    <LeadCaptureInput
+                      placeholder="Enter your email..."
+                      onChange={event => leadChange(event)}
+                    ></LeadCaptureInput>
+                    <TryEnrichmentForFreeBtn>
+                      Get Started
+                    </TryEnrichmentForFreeBtn>
+                  </LeadCaptureForm>
+                  <Or>or</Or>
+                  <RequestDemoBtn>Request a Demo</RequestDemoBtn>
+                </LeadCapture>
+              </RequestDataContainer>
+            </>
           ) : (
             <RequestData />
           )}
@@ -98,6 +160,26 @@ const FreeTool = () => {
     </FreeToolContainer>
   );
 };
+
+const PersonHeader = styled.div`
+  padding-left: 20px;
+  display: flex;
+`;
+const Avatar = styled.img`
+  border-radius: 6px;
+  height: 50px;
+  width: 50px;
+`;
+
+const EnrichmentText = styled.div`
+  font-size: 18px;
+  color: grey;
+  display: flex;
+`;
+
+const EnrichmentEmail = styled.p`
+  color: black;
+`;
 
 const FreeToolContainer = styled.section`
   padding-top: 120px;
@@ -173,17 +255,17 @@ const LeadCapture = styled.div`
 
 const LeadCaptureForm = styled.form`
   display: flex;
-`
+`;
 
 const LeadCaptureInput = styled.input`
   width: 320px;
   height: 56px;
   font-size: 16px;
   margin-right: 20px;
-`
+`;
 
 const Or = styled.p`
   padding: 20px;
-`
+`;
 
 export default FreeTool;
