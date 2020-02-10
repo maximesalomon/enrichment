@@ -5,7 +5,7 @@ const Enrichment = () => {
   return (
     <>
       <h1>Enrichment 🛠</h1>
-      <Link to="/enrichment/free-tool">
+      <Link to="/free-tool">
         <button>Try Enrichment for Free</button>
       </Link>
     </>
