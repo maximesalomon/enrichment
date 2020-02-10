@@ -37,24 +37,24 @@ router.post("/", (req, res) => {
     visitor_id: id,
     type: req.body.type,
     data: req.body.data
-  }
+  };
 
   DB.findVisitorById(id)
     .then(visitor => {
       if (visitor.requests_count < 5) {
         DB.createRequest(request).then(request => {
           clearbit.Enrichment.find({ email: req.body.data, stream: true })
-          .then(enrichment => {
-            // Clearbit has enrich visitor Enrichment
-            res.status(200).json(enrichment);
-          })
-          .then(res => {
-            DB.updateVisitorRequestsCount(id);
-          })
-          .catch(err => {
-            res.status(500).json({ message: "Failed to update visitor!" });
-          });
-        })
+            .then(enrichment => {
+              // Clearbit has enrich visitor Enrichment
+              res.status(200).json(enrichment);
+            })
+            .then(res => {
+              DB.updateVisitorRequestsCount(id);
+            })
+            .catch(err => {
+              res.status(500).json({ message: "Failed to update visitor!" });
+            });
+        });
       } else {
         res.send(`You have used your 5 free credits!`);
       }

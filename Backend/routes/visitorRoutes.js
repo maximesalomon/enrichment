@@ -45,19 +45,19 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const visitor = req.body;
   DB.findVisitorById(id)
-  .update(visitor)
-  .then(success => {
-    if (success === 1) {
-      res.send(`Signal has been successfully updated!`);
-    } else {
-      res
-        .status(404)
-        .json({ message: "Could not find signal with given id." });
-    }
-  })
-  .catch(err => {
-    res.status(500).json({ message: "Failed to update signal!" });
-  });
+    .update(visitor)
+    .then(success => {
+      if (success === 1) {
+        res.send(`Visitor has been successfully updated!`);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find visitor with given id." });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to update visitor!" });
+    });
 });
 
 module.exports = router;

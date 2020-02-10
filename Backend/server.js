@@ -1,7 +1,7 @@
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-require('dotenv').config()
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+require("dotenv").config(); // enable .env
 
 const visitorRoutes = require("./routes/visitorRoutes");
 const requestRoutes = require("./routes/requestRoutes");
@@ -13,6 +13,7 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
+// Server routers
 server.use("/visitors", visitorRoutes);
 server.use("/requests", requestRoutes);
 

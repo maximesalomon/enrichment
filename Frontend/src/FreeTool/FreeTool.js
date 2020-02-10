@@ -63,23 +63,24 @@ const FreeTool = () => {
       <RequestDataContainer>
         <PersonHeader>
           <Avatar src={request.person.avatar} />
-          <EnrichmentText>enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail></EnrichmentText>
+          <EnrichmentText>
+            enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail>
+          </EnrichmentText>
         </PersonHeader>
         <PersonInfos>
-          <p>Name: {request.person.name.fullName}</p>
-          <p>Bio: {request.person.bio}</p>
-          <p>Email: {request.person.email}</p>
+          <p>Name: {request.person.name.fullName}</p><br/>
+          <p>Bio: {request.person.bio}</p><br/>
+          <p>Email: {request.person.email}</p><br/>
           <p>
             Employment: {request.person.employment.title} at{" "}
             {request.person.employment.name}
-          </p>
-          <p>Location: {request.person.location}</p>
-
-          <p>Website: {request.person.site}</p>
-          <p>Github: {request.person.github.handle}</p>
-          <p>Twitter: {request.person.twitter.handle}</p>
-          <p>Facebook: {request.person.facebook.handle}</p>
-          <p>Linkedin: {request.person.linkedin.handle}</p>
+          </p><br/>
+          <p>Location: {request.person.location}</p><br/>
+          <p>Website: {request.person.site}</p><br/>
+          <p>Github: {request.person.github.handle}</p><br/>
+          <p>Twitter: {request.person.twitter.handle}</p><br/>
+          <p>Facebook: {request.person.facebook.handle}</p><br/>
+          <p>Linkedin: {request.person.linkedin.handle}</p><br/>
         </PersonInfos>
       </RequestDataContainer>
     );
@@ -163,6 +164,7 @@ const Avatar = styled.img`
 `;
 
 const EnrichmentText = styled.div`
+  padding-top: 14px;
   font-size: 18px;
   color: grey;
   display: flex;
@@ -176,7 +178,7 @@ const EnrichmentEmail = styled.p`
 const PersonInfos = styled.div`
   margin-top: 40px;
   padding-left: 20px;
-`
+`;
 
 const FreeToolContainer = styled.section`
   padding-top: 120px;

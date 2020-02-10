@@ -22,7 +22,7 @@ export const RequestDemoBtn = styled.button`
 `;
 
 export const EnrichBtn = styled.button`
-margin-left: 20px;
+  margin-left: 20px;
   height: 60px;
   color: white;
   background-color: #0088f6;
@@ -32,7 +32,7 @@ margin-left: 20px;
   border-radius: 8px;
   cursor: pointer;
   outline: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;

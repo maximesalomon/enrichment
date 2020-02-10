@@ -1,6 +1,5 @@
 const db = require("./db");
 
-
 // Visitors helpers
 const createVisitor = visitor => {
   return db("visitors").insert(visitor);
@@ -19,7 +18,7 @@ const updateVisitorRequestsCount = id => {
     .then(visitor => {
       const updated_visitor = {
         id: id,
-        requests_count: (visitor.requests_count += 1)
+        requests_count: (visitor.requests_count += 1) // update requests_count
       };
       return db("visitors")
         .where({ id })
@@ -27,7 +26,6 @@ const updateVisitorRequestsCount = id => {
         .update(updated_visitor);
     });
 };
-
 
 // Request helpers
 const createRequest = request => {

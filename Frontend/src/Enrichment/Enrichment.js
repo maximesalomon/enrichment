@@ -2,16 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { TryEnrichmentForFreeBtn, RequestDemoBtn } from '../Buttons/Buttons';
+import { TryEnrichmentForFreeBtn, RequestDemoBtn } from "../Buttons/Buttons";
 
 const Enrichment = () => {
   return (
     <EnrichmentContainer>
       <HeroContainer>
         <Tagline>Automatically enrich your records and workflows</Tagline>
-        <Description>Shorten sign-up forms, improve lead scoring, and simply save your team time.</Description>
+        <Description>
+          Shorten sign-up forms, improve lead scoring, and simply save your team
+          time.
+        </Description>
         <HeroCTAs>
-          <Link to="/free-tool"><TryEnrichmentForFreeBtn>Try Enrichment for Free</TryEnrichmentForFreeBtn></Link>
+          <Link to="/free-tool">
+            <TryEnrichmentForFreeBtn>
+              Try Enrichment for Free
+            </TryEnrichmentForFreeBtn>
+          </Link>
           <RequestDemoBtn>Request a demo</RequestDemoBtn>
         </HeroCTAs>
       </HeroContainer>
@@ -50,8 +57,6 @@ const HeroCTAs = styled.div`
   margin: 0 auto;
   max-width: 320px;
   justify-content: space-between;
-`
-
-
+`;
 
 export default Enrichment;
