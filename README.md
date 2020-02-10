@@ -38,5 +38,5 @@ yarn install
 
 yarn start
 
-
-Maxime Salomon - maxime@croissant.io 🇫🇷
+## About
+Maxime Salomon - Growth Engineer - maxime@croissant.io 🇫🇷

@@ -13,7 +13,9 @@ const App = () => {
   const [visitorId, setVisitorId] = useState();
 
   const getVisitorId = () => {
-    const url = "https://enrichment-free-tool.herokuapp.com/visitors";
+    const url = process.env.NODE_ENV === "production"
+      ? `https://enrichment-free-tool.herokuapp.com/visitors`
+      : `http://localhost:7000/visitors`
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };

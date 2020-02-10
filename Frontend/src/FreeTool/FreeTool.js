@@ -29,7 +29,9 @@ const FreeTool = () => {
 
   const requestSubmit = event => {
     event.preventDefault();
-    const url = "https://enrichment-free-tool.herokuapp.com/requests";
+    const url = process.env.NODE_ENV === "production"
+      ? `https://enrichment-free-tool.herokuapp.com/requests`
+      : `http://localhost:7000/requests`
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
@@ -62,25 +64,22 @@ const FreeTool = () => {
     return (
       <RequestDataContainer>
         <PersonHeader>
-          <Avatar src={request.person.avatar} />
+          { request.person.avatar ? <Avatar src={request.person.avatar}/> : null }
           <EnrichmentText>
             enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail>
           </EnrichmentText>
         </PersonHeader>
         <PersonInfos>
-          <p>Name: {request.person.name.fullName}</p><br/>
-          <p>Bio: {request.person.bio}</p><br/>
-          <p>Email: {request.person.email}</p><br/>
-          <p>
-            Employment: {request.person.employment.title} at{" "}
-            {request.person.employment.name}
-          </p><br/>
-          <p>Location: {request.person.location}</p><br/>
-          <p>Website: {request.person.site}</p><br/>
-          <p>Github: {request.person.github.handle}</p><br/>
-          <p>Twitter: {request.person.twitter.handle}</p><br/>
-          <p>Facebook: {request.person.facebook.handle}</p><br/>
-          <p>Linkedin: {request.person.linkedin.handle}</p><br/>
+          { request.person.name.fullName ? <p>Name: {request.person.name.fullName}</p> : null }
+          { request.person.bio ? <p>Bio: {request.person.bio}</p> : null }
+          { request.person.email ? <p>Email: {request.person.email}</p> : null }
+          { request.person.employment.title && request.person.employment.name ? <p>Employment: {request.person.employment.title} at{" "} {request.person.employment.name}</p> : null }
+          { request.person.location ? <p>Location: {request.person.location}</p> : null }
+          { request.person.site ? <p>Website: {request.person.site}</p> : null }
+          { request.person.github.handle ? <p>Github: {request.person.github.handle}</p> : null }
+          { request.person.twitter.handle ? <p>Twitter: {request.person.twitter.handle}</p> : null }
+          { request.person.facebook.handle ? <p>Facebook: {request.person.facebook.handle}</p> : null }
+          { request.person.linkedin.handle ? <p>Linkedin: {request.person.linkedin.handle}</p> : null }
         </PersonInfos>
       </RequestDataContainer>
     );
@@ -89,7 +88,9 @@ const FreeTool = () => {
   const leadSubmit = event => {
     event.preventDefault();
 
-    const url = `https://enrichment-free-tool.herokuapp.com/visitors/${visitor.visitorId}`;
+    const url = process.env.NODE_ENV === "production"
+      ? `https://enrichment-free-tool.herokuapp.com/visitors/${visitor.visitorId}`
+      : `http://localhost:7000/visitors/${visitor.visitorId}`
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
@@ -140,7 +141,7 @@ const FreeTool = () => {
                   <Or>or</Or>
                   <RequestDemoBtn>Request a Demo</RequestDemoBtn>
                 </LeadCapture>
-                <leadConfirmation>{leadConfirmation}</leadConfirmation>
+                <LeadConfirmation>{leadConfirmation}</LeadConfirmation>
               </RequestDataContainer>
             </>
           ) : (
@@ -153,7 +154,7 @@ const FreeTool = () => {
 };
 
 const PersonHeader = styled.div`
-  padding-left: 20px;
+  padding-left: 28px;
   display: flex;
 `;
 
@@ -165,7 +166,7 @@ const Avatar = styled.img`
 `;
 
 const EnrichmentText = styled.div`
-  padding-top: 14px;
+  padding-top: 20px;
   font-size: 18px;
   color: grey;
   display: flex;
@@ -181,7 +182,7 @@ const PersonInfos = styled.div`
   padding-left: 20px;
 `;
 
-const leadConfirmation = styled.div`
+const LeadConfirmation = styled.div`
   padding-top: 14px;
 `;
 
