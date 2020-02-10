@@ -42,7 +42,7 @@ const FreeTool = () => {
       .post(url, qs.stringify(requestBody), config)
       .then(res => {
         setRequest(res.data);
-        setData("")
+        setData("");
       })
       .catch(err => {
         console.log(err);
@@ -63,42 +63,24 @@ const FreeTool = () => {
       <RequestDataContainer>
         <PersonHeader>
           <Avatar src={request.person.avatar} />
-          <EnrichmentText>
-            enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail>
-          </EnrichmentText>
+          <EnrichmentText>enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail></EnrichmentText>
         </PersonHeader>
-        <p>
-          <strong>Name:</strong> {request.person.name.fullName}
-        </p>
-        <p>
-          <strong>Bio:</strong> {request.person.bio}
-        </p>
-        <p>
-          <strong>Email:</strong> {request.person.email}
-        </p>
-        <p>
-          <strong>Employment:</strong> {request.person.employment.title} at{" "}
-          {request.person.employment.name}
-        </p>
-        <p>
-          <strong>Location:</strong> {request.person.location}
-        </p>
+        <PersonInfos>
+          <p>Name: {request.person.name.fullName}</p>
+          <p>Bio: {request.person.bio}</p>
+          <p>Email: {request.person.email}</p>
+          <p>
+            Employment: {request.person.employment.title} at{" "}
+            {request.person.employment.name}
+          </p>
+          <p>Location: {request.person.location}</p>
 
-        <p>
-          <strong>Website:</strong> {request.person.site}
-        </p>
-        <p>
-          <strong>Github:</strong> {request.person.github.handle}
-        </p>
-        <p>
-          <strong>Twitter:</strong> {request.person.twitter.handle}
-        </p>
-        <p>
-          <strong>Facebook:</strong> {request.person.facebook.handle}
-        </p>
-        <p>
-          <strong>Linkedin"</strong> {request.person.linkedin.handle}
-        </p>
+          <p>Website: {request.person.site}</p>
+          <p>Github: {request.person.github.handle}</p>
+          <p>Twitter: {request.person.twitter.handle}</p>
+          <p>Facebook: {request.person.facebook.handle}</p>
+          <p>Linkedin: {request.person.linkedin.handle}</p>
+        </PersonInfos>
       </RequestDataContainer>
     );
   };
@@ -116,8 +98,10 @@ const FreeTool = () => {
     axios
       .put(url, qs.stringify(requestBody), config)
       .then(res => {
-        setLead("")
-        setLeadConfirmation("Thanks! We just sent you more informations on Clearbit Enrichment.");
+        setLead("");
+        setLeadConfirmation(
+          "Thanks! We just sent you more informations on Clearbit Enrichment."
+        );
       })
       .catch(err => {
         console.log(err);
@@ -175,6 +159,7 @@ const Avatar = styled.img`
   border-radius: 6px;
   height: 50px;
   width: 50px;
+  padding: 10px;
 `;
 
 const EnrichmentText = styled.div`
@@ -185,7 +170,13 @@ const EnrichmentText = styled.div`
 
 const EnrichmentEmail = styled.p`
   color: black;
+  padding-left: 4px;
 `;
+
+const PersonInfos = styled.div`
+  margin-top: 40px;
+  padding-left: 20px;
+`
 
 const FreeToolContainer = styled.section`
   padding-top: 120px;
