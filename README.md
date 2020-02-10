@@ -24,6 +24,8 @@ cd Backend
 
 yarn install
 
+Create a .env file at the root of /Backend with your CLEARBIT_SECRET_API_KEY
+
 npx knex migrate:latest
 
 yarn server
