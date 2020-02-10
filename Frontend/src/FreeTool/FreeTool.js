@@ -1,7 +1,24 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { VisitorContext } from "../App";
+
+import Result from "./Result";
+
+import {
+  RequestDataContainer,
+  DefaultDataContainer,
+  FreeToolContainer,
+  EnrichContainer,
+  LeadCapture,
+  LeadCaptureForm,
+  LeadCaptureInput,
+  EnrichForm,
+  Or,
+  LeadConfirmation,
+  EnrichInput,
+  DefaultDataTitle,
+  EnrichData
+} from "./FreeToolStyle";
 
 import {
   EnrichBtn,
@@ -29,9 +46,10 @@ const FreeTool = () => {
 
   const requestSubmit = event => {
     event.preventDefault();
-    const url = process.env.NODE_ENV === "production"
-      ? `https://enrichment-free-tool.herokuapp.com/requests`
-      : `http://localhost:7000/requests`
+    const url =
+      process.env.NODE_ENV === "production"
+        ? `https://enrichment-free-tool.herokuapp.com/requests`
+        : `http://localhost:7000/requests`;
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
@@ -60,37 +78,13 @@ const FreeTool = () => {
     );
   };
 
-  const RequestData = () => {
-    return (
-      <RequestDataContainer>
-        <PersonHeader>
-          { request.person.avatar ? <Avatar src={request.person.avatar}/> : null }
-          <EnrichmentText>
-            enrichment<EnrichmentEmail>{request.person.email}</EnrichmentEmail>
-          </EnrichmentText>
-        </PersonHeader>
-        <PersonInfos>
-          { request.person.name.fullName ? <p>Name: {request.person.name.fullName}</p> : null }
-          { request.person.bio ? <p>Bio: {request.person.bio}</p> : null }
-          { request.person.email ? <p>Email: {request.person.email}</p> : null }
-          { request.person.employment.title && request.person.employment.name ? <p>Employment: {request.person.employment.title} at{" "} {request.person.employment.name}</p> : null }
-          { request.person.location ? <p>Location: {request.person.location}</p> : null }
-          { request.person.site ? <p>Website: {request.person.site}</p> : null }
-          { request.person.github.handle ? <p>Github: {request.person.github.handle}</p> : null }
-          { request.person.twitter.handle ? <p>Twitter: {request.person.twitter.handle}</p> : null }
-          { request.person.facebook.handle ? <p>Facebook: {request.person.facebook.handle}</p> : null }
-          { request.person.linkedin.handle ? <p>Linkedin: {request.person.linkedin.handle}</p> : null }
-        </PersonInfos>
-      </RequestDataContainer>
-    );
-  };
-
   const leadSubmit = event => {
     event.preventDefault();
 
-    const url = process.env.NODE_ENV === "production"
-      ? `https://enrichment-free-tool.herokuapp.com/visitors/${visitor.visitorId}`
-      : `http://localhost:7000/visitors/${visitor.visitorId}`
+    const url =
+      process.env.NODE_ENV === "production"
+        ? `https://enrichment-free-tool.herokuapp.com/visitors/${visitor.visitorId}`
+        : `http://localhost:7000/visitors/${visitor.visitorId}`;
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
@@ -145,132 +139,12 @@ const FreeTool = () => {
               </RequestDataContainer>
             </>
           ) : (
-            <RequestData />
+            <Result request={request} />
           )}
         </EnrichData>
       </EnrichContainer>
     </FreeToolContainer>
   );
 };
-
-const PersonHeader = styled.div`
-  padding-left: 28px;
-  display: flex;
-`;
-
-const Avatar = styled.img`
-  border-radius: 6px;
-  height: 50px;
-  width: 50px;
-  padding: 10px;
-`;
-
-const EnrichmentText = styled.div`
-  padding-top: 20px;
-  font-size: 18px;
-  color: grey;
-  display: flex;
-`;
-
-const EnrichmentEmail = styled.p`
-  color: black;
-  padding-left: 4px;
-`;
-
-const PersonInfos = styled.div`
-  margin-top: 40px;
-  padding-left: 20px;
-`;
-
-const LeadConfirmation = styled.div`
-  padding-top: 14px;
-`;
-
-const FreeToolContainer = styled.section`
-  padding-top: 120px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const EnrichContainer = styled.div`
-  padding: 80px;
-  max-width: 1080px;
-  margin: 0 auto;
-  border: 6px solid #0088f6;
-  border-radius: 8px;
-  background-color: #f4f6f8;
-`;
-
-const EnrichForm = styled.form`
-  max-width: 800px;
-  margin: 0 auto;
-`;
-
-const EnrichInput = styled.input`
-  padding: 10px;
-  width: 662px;
-  height: 40px;
-  border-radius: 8px;
-  outline: none;
-  color: #1e2125;
-  font-size: 18px;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  box-shadow: 0px 3px 7px 0px rgba(225, 227, 229, 0.55), 0px 1px 2px 0px #e1e3e5;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-`;
-
-const EnrichData = styled.div`
-  margin: 40px auto;
-  max-width: 800px;
-  border-radius: 8px;
-  outline: none;
-  color: #1e2125;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  box-shadow: 0px 3px 7px 0px rgba(225, 227, 229, 0.55), 0px 1px 2px 0px #e1e3e5;
-`;
-
-const DefaultDataContainer = styled.div`
-  padding: 100px;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const DefaultDataTitle = styled.p`
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-`;
-
-const RequestDataContainer = styled.div`
-  padding: 40px;
-  max-width: 800px;
-`;
-
-const LeadCapture = styled.div`
-  padding-top: 40px;
-  display: flex;
-`;
-
-const LeadCaptureForm = styled.form`
-  display: flex;
-`;
-
-const LeadCaptureInput = styled.input`
-  width: 320px;
-  height: 56px;
-  font-size: 16px;
-  margin-right: 20px;
-`;
-
-const Or = styled.p`
-  padding: 20px;
-`;
 
 export default FreeTool;
