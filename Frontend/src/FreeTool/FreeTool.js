@@ -17,6 +17,7 @@ const FreeTool = () => {
   const [data, setData] = useState("");
   const [lead, setLead] = useState("");
   const [request, setRequest] = useState(null);
+  const [leadConfirmation, setleadConfirmation] = useState(null);
 
   const requestChange = event => {
     setData(event.target.value);
@@ -115,8 +116,8 @@ const FreeTool = () => {
     axios
       .put(url, qs.stringify(requestBody), config)
       .then(res => {
-        console.log(res)
         setLead("")
+        setleadConfirmation(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -154,6 +155,7 @@ const FreeTool = () => {
                   <Or>or</Or>
                   <RequestDemoBtn>Request a Demo</RequestDemoBtn>
                 </LeadCapture>
+                {leadConfirmation}
               </RequestDataContainer>
             </>
           ) : (

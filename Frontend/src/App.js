@@ -21,7 +21,6 @@ const App = () => {
       axios
       .post(url, {}, config)
       .then(res => {
-        console.log(res);
         localStorage.setItem("visitor_id", res.data);
         setVisitorId(res.data)
       })
