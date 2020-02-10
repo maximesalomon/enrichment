@@ -7,8 +7,27 @@ const router = express.Router();
 
 // GET visitor by id
 router.get("/:id", (req, res) => {
-  const id = req.params.id; // get id from the request parameters
+  const { id } = req.params; // get id from the request parameters
   res.status(200).send(`hello from the /GET /visitors/${id} endpoint.`);
+});
+
+// GET visitor by id
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  db("visitors")
+    .where({ id })
+    .then(visitor => {
+      if (visitor.requests_count < 5 ) {
+        res.status(200)
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find signal with given id." });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get signal." });
+    });
 });
 
 // POST visitor
