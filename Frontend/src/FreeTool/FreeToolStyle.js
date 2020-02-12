@@ -63,7 +63,7 @@ export const CompanyInfos = styled.div`
 `;
 
 export const LeadConfirmation = styled.div`
-  padding-top: 14px;
+  padding-top: 16px;
 `;
 
 export const FreeToolContainer = styled.section`
